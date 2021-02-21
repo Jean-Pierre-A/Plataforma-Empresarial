@@ -34,8 +34,13 @@ int main(void)
         scanf("%d", &arrDos[i]);
     }
 
+    if(n > nDos){
     resultado = arrayCommon(arr, n , arrDos, nDos, arrResultado, n);
-
+    }
+    else
+    {
+        resultado = arrayCommon(arr, n , arrDos, nDos, arrResultado, nDos);
+    }
     printf("El resultaddo es %d \n", resultado);
     
 }
@@ -44,8 +49,9 @@ int main(void)
 uint8_t arrayCommon(int32_t* arr1, int32_t arr1Size,int32_t* arr2, int32_t arr2Size, int32_t* arrRes, int32_t arrResSize)
 {
 
-    uint8_t cont = 0, cont2 = 0, cont3 = 0;
-    int k = 0, tama = 0;
+    uint8_t cont = 0;
+    int k = 0, r=0, repetido = 0;
+
 
     if(arr1Size >= arr2Size)
     {
@@ -58,10 +64,35 @@ uint8_t arrayCommon(int32_t* arr1, int32_t arr1Size,int32_t* arr2, int32_t arr2S
 
                 if(*(arr1 + i)== *(arr2 + j)){
 
-                    *(arrRes + cont) = *(arr1 + i);
-                    
-                    cont++;
-                    cont2++;
+                      k = *(arr2 + j);
+
+                      repetido = 0;
+
+                      for(int i=0; i < arrResSize; i++)
+                      {
+
+                          if(arrRes[i]==k)
+                          {
+                              repetido = 1;
+
+                          }
+
+                      }
+
+                      if(repetido==0)
+                      {
+                          cont++;
+                          for(int i=arrResSize-1; i > 0; i--)
+                          {
+                              arrRes[i] = arrRes[i-1];
+                          }
+
+                          arrRes[0]=k;
+                          printf("Numero en comun %d \n", k);
+
+                      }
+
+                  
 
    
                 }
@@ -79,69 +110,19 @@ uint8_t arrayCommon(int32_t* arr1, int32_t arr1Size,int32_t* arr2, int32_t arr2S
          for(int j=0; j < arr1Size; j++)
             {
 
-                if(*(arr2 + i)== *(arr1 + j))
-                {
-                    
-                    *(arrRes + cont) = *(arr2 + i);
-                    cont++;
-                    cont2++;
 
-                }
+                
             }
         }
     }
 
- for(int i = 0; i < cont; i++)
+    for(int i = cont-1; i >=0; i--)
     {
-          printf("Resultadoini[%d]: %d\n",i, *(arrRes+i) );
-    }
-  
-    for(int i=0; i < cont; i++)
-    {
-        
-        for(int j =i+1; i< cont; j++)
-        {
-            if(arrRes[i]== arrRes[j])
-            {
-                k = j;
-                cont3 ++;
-                while(k < cont)
-                {
-                    arrRes[k] = arrRes[k+1];
-
-                    k++;
-
-                }
-
-                cont--;
-                j--;
-
-            }
-            
-        }
-        
+          printf("Resultado[%d]: %d\n",r, arrRes[i] );
+          r++;
     }
 
-    
-     for(int i=0; i < cont2; i++)
-     {
-         if(*(arrRes+i) > 1 && *(arrRes+i)< 10000)
-         {
-
-             tama++;
-
-         }
-     }
-
-
-         printf("con %d y con2 %d y con3 %d y tama%d, longi  %d \n", cont, cont2, cont3, tama);
-
-    for(int i = 0; i < tama+1; i++)
-    {
-          printf("Resultado[%d]: %d\n",i, arrRes[i] );
-    }
-
-    return cont2;
+    return cont;
    
 
 }
