@@ -3,6 +3,10 @@
 #include <stdlib.h>
 #include <string.h>
 #define MAX 50
+
+void FunNot(FILE * IN_FILE, FILE * salida);
+void FunXor(FILE * IN_FILE, FILE * salida);
+
 int main()
 {
     
@@ -19,9 +23,7 @@ int main()
     IN_FILE = fopen(archivoEnt, "r");
     OUT_FILE =fopen(archivoSal, "w");
 
-    void FunNot(FILE * IN_FILE, FILE * salida);
-    void FunXor(FILE * IN_FILE, FILE * salida);
-
+  
     if(IN_FILE == NULL)
     {
         printf("No se pueden abrir, ya que esta Nulo \n");
