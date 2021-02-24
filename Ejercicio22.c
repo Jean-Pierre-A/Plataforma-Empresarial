@@ -4,9 +4,9 @@
 #include <string.h>
 #define MAX 50
 
+
 void FunNot(FILE * IN_FILE, FILE * salida);
 void FunXor(FILE * IN_FILE, FILE * salida);
-
 int main()
 {
     
@@ -17,13 +17,12 @@ int main()
     scanf("%s", archivoEnt );
     printf("Ingrese el Nombre del Archivo de Salida \n");
     scanf("%s", archivoSal );
-
     FILE *IN_FILE;
     FILE *OUT_FILE;
     IN_FILE = fopen(archivoEnt, "r");
     OUT_FILE =fopen(archivoSal, "w");
+    
 
-  
     if(IN_FILE == NULL)
     {
         printf("No se pueden abrir, ya que esta Nulo \n");
@@ -45,7 +44,10 @@ int main()
     {
         printf("Seleccione Una Opción Valida");
     }
+    fclose(IN_FILE);
+    fclose(OUT_FILE);
     return 0;
+    
 }
 
 void FunNot(FILE  * IN_FILE, FILE * salida)
