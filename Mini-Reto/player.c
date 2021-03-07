@@ -1,0 +1,49 @@
+ #include <stdlib.h>
+ #include <string.h>
+ #include <stdio.h>
+ #include "gun.h"
+
+     
+     typedef struct {
+       char* name;
+       struct gun_t* gun;
+     } player_t;
+
+    
+     player_t* player_new() {
+       return (player_t*)malloc(sizeof(player_t));
+     }
+
+     
+     void player_ctor(player_t* player, const char* name) {
+       player->name = (char*)malloc((strlen(name) + 1) * sizeof(char));
+       strcpy(player->name, name);
+ 
+       player->gun = NULL;
+     }
+
+     
+     void player_dtor(player_t* player) {
+       free(player->name);
+     }
+
+    
+     void player_pickup(player_t* player, struct gun_t* gun) {
+      
+       player->gun = gun;
+     }
+
+     void player_shoot(player_t* player) {
+      
+       if (player->gun) {
+             gun_shoot(player->gun);
+       } else {
+             printf("Caballero No tiene Arma , Despierte \n");
+             exit(1);
+       }
+     }
+
+     void player_drop(player_t* player) {
+    
+       player->gun = NULL;
+     }
